@@ -4,6 +4,7 @@ import BootSequence from '@/components/core/BootSequence'
 import { Bricolage_Grotesque } from 'next/font/google'
 import { Quicksand } from 'next/font/google'
 import { Shadows_Into_Light } from 'next/font/google'
+import Navbar from '@/components/ui/Navbar'
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -37,7 +38,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${quicksand.variable} ${bricolage.variable} ${shadows.variable}`}>
       <body>
-        <BootSequence />
+        <Navbar/>
+        {/* <BootSequence /> */}
         {/* <AppLayout> */}
           {children}
           {/* </AppLayout> */}
