@@ -69,8 +69,9 @@ export default function Navbar() {
         </ul>
 
         {/* Right: Contact Button */}
-        <button className=" text-gray-400 font-semibold px-8 py-2 rounded-lg border-2 border-gray-600 transition-all duration-300 hover:bg-gray-700 hover:text-white">
-          Contact
+        <button className=" text-white/80 font-semibold px-8 py-2 rounded-lg border-2 border-white/80 transition-all duration-300 hover:bg-gray-700 hover:text-white">
+          
+          Contact Me
         </button>
       </div>
     </nav>
