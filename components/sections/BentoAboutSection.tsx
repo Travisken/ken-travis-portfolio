@@ -25,40 +25,39 @@ function CursorGlowCard({
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-  if (!cardRef.current) return;
+    if (!cardRef.current) return;
 
-  const directionMap = {
-    top: { y: -60, x: 0 },
-    bottom: { y: 60, x: 0 },
-    left: { x: -60, y: 0 },
-    right: { x: 60, y: 0 },
-  };
+    const directionMap = {
+      top: { y: -60, x: 0 },
+      bottom: { y: 60, x: 0 },
+      left: { x: -60, y: 0 },
+      right: { x: 60, y: 0 },
+    };
 
-  const ctx = gsap.context(() => {
-    gsap.fromTo(
-      cardRef.current,
-      {
-        opacity: 0,
-        ...directionMap[animateFrom],
-      },
-      {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: cardRef.current,
-          start: "top 85%",
-          end: "top 40%",
-          scrub: true, // 👈 this makes it fluid & reversible
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cardRef.current,
+        {
+          opacity: 0,
+          ...directionMap[animateFrom],
         },
-      }
-    );
-  }, cardRef);
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: "top 85%",
+            end: "top 40%",
+            scrub: true, // 👈 this makes it fluid & reversible
+          },
+        },
+      );
+    }, cardRef);
 
-  return () => ctx.revert();
-}, [animateFrom]);
-
+    return () => ctx.revert();
+  }, [animateFrom]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -74,7 +73,7 @@ function CursorGlowCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`relative overflow-hidden rounded-3xl cursor-pointer bg-[#212121] p-6 ${className}`}
+      className={`relative overflow-hidden rounded-3xl cursor-pointer bg-[#212121] p-4 md:p-6 ${className}`}
     >
       {/* Base Border */}
       <div className="pointer-events-none absolute inset-0 rounded-3xl border border-white/5" />
@@ -126,12 +125,51 @@ function CursorGlowCard({
 export { CursorGlowCard };
 
 export default function AboutSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    // Get all text elements (h1 and p)
+    const textElements = containerRef.current.querySelectorAll("h1, p");
+
+    textElements.forEach((el) => {
+      // Split text into words and wrap each in a span
+      const words = el.textContent?.split(" ") || [];
+      el.innerHTML = words
+        .map((word) => `<span class="word inline-block mr-2">${word}</span>`)
+        .join(" ");
+    });
+
+    // Animate each word on scroll
+    gsap.fromTo(
+      ".word",
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+        },
+      },
+    );
+  }, []);
+
   return (
-    <section className="bg-[#0a0a0a] flex items-center justify-center px-8 py-20">
+    <section className="bg-[#0a0a0a] flex items-center justify-center px-4 md:px-8 py-20">
       <div className="max-w-6xl">
         {/* Header */}
-        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <h1 className="text-5xl font-bold leading-tight">
+        <div
+          ref={containerRef}
+          className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2"
+        >
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight">
             Built Through Curiosity.
             <br />
             Refined by Craft.
@@ -142,7 +180,6 @@ export default function AboutSection() {
             that scale.
           </p>
         </div>
-
         {/* Bento Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-6 md:grid-rows-3">
           <CursorGlowCard
@@ -151,14 +188,14 @@ export default function AboutSection() {
             className="md:col-span-2 md:row-span-2"
             animateFrom="left"
           >
-            <div className="mt-6 flex flex-wrap gap-4">
+            <div className="mt-6 flex max-md:flex-col gap-4">
               <motion.a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black"
+                className="rounded-xl flex-1 items-center flex justify-center bg-white px-6 py-3 text-sm font-semibold text-black"
               >
                 View Resume
               </motion.a>
@@ -167,7 +204,7 @@ export default function AboutSection() {
                 href="/contact"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white"
+                className="rounded-xl border flex-1 items-center flex justify-center border-white/20 px-6 py-3 text-sm font-semibold text-white"
               >
                 Contact Me
               </motion.a>
