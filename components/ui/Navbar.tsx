@@ -103,7 +103,7 @@ export default function Navbar() {
         scrolled ? "backdrop-blur-lg bg-black/20 border-b border-white/30" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 md:px-8 relative">
+      <div className="max-w-7xl mx-auto flex items-center justify-between py-4 relative">
         {/* LEFT — Clock */}
         <motion.div variants={fadeFromLeft} className="text-gray-300 font-mono text-sm flex gap-4 items-center">
           <span className="flex gap-2 font-semibold bg-[#181818] px-4 py-3 rounded-lg items-center">

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, cubicBezier } from "framer-motion";
+import ExperienceSection from "@/components/sections/ExperienceSection";
 
 const container = {
   hidden: {},
@@ -11,6 +12,23 @@ const container = {
       delayChildren: 0.2,
     },
   },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+    rotate: 0,
+  },
+  visible: (rotate: number) => ({
+    opacity: 1,
+    y: 0,
+    rotate,
+    transition: {
+      duration: 0.9,
+      ease: cubicBezier(0.22, 1, 0.36, 1),
+    },
+  }),
 };
 
 const item = {
@@ -28,90 +46,108 @@ const item = {
 export default function AboutSection() {
   return (
     <>
-    <section className="w-full relative flex justify-center items-start min-h-screen py-30">
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mx-auto max-w-6xl space-y-8 text-white/60"
-      >
-         <h3 className="font-semibold text-2xl flex  text-white ">
-          <Image
-            src="/images/handGif.svg"
-            height={40}
-            width={40}
-            alt="waving hand"
-            className="waveHand"
-          />
-          Hello I&apos;m Travis Kensuomo
-        </h3>
-        <motion.p variants={item}>
-          I’m a <strong className="text-white">frontend-focused engineer</strong> who
-          thrives at the intersection of <strong className="text-white">design,
-          motion, and performance</strong>. I care deeply about how products feel
-          just as much as how they function, crafting interfaces that are
-          intentional, intuitive, and refined.
-        </motion.p>
+      <section className="flex flex-col items-center justify-center  w-full">
+        <section className="relative md:w-7xl min-h-screen   items-center justify-center flex  overflow-hidden">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-md:px-4 w-full py-30 md:max-w-3xl space-y-8 text-white/60"
+          >
+            <h3 className="font-semibold text-2xl flex  text-white ">
+              <Image
+                src="/images/handGif.svg"
+                height={40}
+                width={40}
+                alt="waving hand"
+                className="waveHand"
+              />
+              Hello I&apos;m Travis Kensuomo
+            </h3>
+            <motion.p variants={item}>
+              I’m a{" "}
+              <strong className="text-white">frontend-focused engineer</strong>{" "}
+              who thrives at the intersection of{" "}
+              <strong className="text-white">
+                design, motion, and performance
+              </strong>
+              . I care deeply about how products feel just as much as how they
+              function, crafting interfaces that are intentional, intuitive, and
+              refined.
+            </motion.p>
 
-        <motion.p variants={item}>
-          Over the years, I’ve gained <strong className="text-white">proven experience
-          building successful products</strong> for clients across
-          <strong className="text-white"> several countries</strong>, collaborating
-          across time zones and cultures to ship reliable, scalable digital
-          solutions that solve real problems.
-        </motion.p>
+            <motion.p variants={item}>
+              Over the years, I’ve gained{" "}
+              <strong className="text-white">
+                proven experience building successful products
+              </strong>{" "}
+              for clients across
+              <strong className="text-white"> several countries</strong>,
+              collaborating across time zones and cultures to ship reliable,
+              scalable digital solutions that solve real problems.
+            </motion.p>
 
-        <motion.p variants={item}>
-          My approach blends <strong className="text-white">strong technical
-          execution</strong> with a sharp visual sensibility. I enjoy transforming
-          complex requirements into clean systems, paying close attention to
-          structure, micro-interactions, and long-term maintainability.
-        </motion.p>
+            <motion.p variants={item}>
+              My approach blends{" "}
+              <strong className="text-white">strong technical execution</strong>{" "}
+              with a sharp visual sensibility. I enjoy transforming complex
+              requirements into clean systems, paying close attention to
+              structure, micro-interactions, and long-term maintainability.
+            </motion.p>
 
-        <motion.p variants={item}>
-          I’ve worked across a broad range of problem spaces, which has shaped my
-          ability to adapt quickly and think holistically about products rather
-          than isolated features.
-        </motion.p>
+            <motion.p variants={item}>
+              I’ve worked across a broad range of problem spaces, which has
+              shaped my ability to adapt quickly and think holistically about
+              products rather than isolated features.
+            </motion.p>
 
-        <motion.div variants={item}>
-          <p className="mb-3 text-sm uppercase tracking-wide text-neutral-400">
-            Project Scope
-          </p>
-          <ul className="list-disc space-y-2 pl-5">
-            <li>
-              <strong className="text-white">Marketing & portfolio websites</strong>
-            </li>
-            <li>
-              <strong className="text-white">SaaS dashboards</strong> and internal tools
-            </li>
-            <li>
-              <strong className="text-white">E-commerce experiences</strong>
-            </li>
-            <li>
-              <strong className="text-white">Data-driven web applications</strong>
-            </li>
-            <li>
-              <strong className="text-white">Animated, interaction-heavy interfaces</strong>
-            </li>
-          </ul>
-        </motion.div>
+            <motion.div variants={item}>
+              <p className="mb-3 text-sm uppercase tracking-wide text-neutral-400">
+                Project Scope
+              </p>
+              <ul className="list-disc space-y-2 pl-5">
+                <li>
+                  <strong className="text-white">
+                    Marketing & portfolio websites
+                  </strong>
+                </li>
+                <li>
+                  <strong className="text-white">SaaS dashboards</strong> and
+                  internal tools
+                </li>
+                <li>
+                  <strong className="text-white">E-commerce experiences</strong>
+                </li>
+                <li>
+                  <strong className="text-white">
+                    Data-driven web applications
+                  </strong>
+                </li>
+                <li>
+                  <strong className="text-white">
+                    Animated, interaction-heavy interfaces
+                  </strong>
+                </li>
+              </ul>
+            </motion.div>
 
-        <motion.p variants={item}>
-          I’m also <strong className="text-white">highly adaptable</strong> and
-          <strong className="text-white"> quick to learn</strong>. I’m comfortable
-          stepping into new codebases, rapidly understanding a company’s framework,
-          and catching up fast to deliver value without slowing the team down.
-        </motion.p>
-      </motion.div>
+            <motion.p variants={item}>
+              I’m also <strong className="text-white">highly adaptable</strong>{" "}
+              and
+              <strong className="text-white"> quick to learn</strong>. I’m
+              comfortable stepping into new codebases, rapidly understanding a
+              company’s framework, and catching up fast to deliver value without
+              slowing the team down.
+            </motion.p>
+          </motion.div>
 
-
-      <div className="bg-red-400 max-w-7xl ">
-
-      </div>
-    </section>
+          {/* <div className="flex flex-1 min-h-screen relative">
+           
+          </div> */}
+        </section>
+        <ExperienceSection />
+      </section>
     </>
-    
   );
 }

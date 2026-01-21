@@ -56,3 +56,22 @@ body {
     transform: rotate(0deg);
   }
 }
+
+
+/* Base dot grid */
+.dot-pattern {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.18) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+/* Softer / larger variation */
+.dot-pattern-soft {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.12) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 28px 28px;
+}
