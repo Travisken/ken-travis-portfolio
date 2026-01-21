@@ -15,7 +15,7 @@ export default function HeroSection() {
   const headingRef = useRef<HTMLDivElement>(null);
   const purpleRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const aboutBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
