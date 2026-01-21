@@ -137,23 +137,34 @@ export default function Navbar() {
         </motion.div>
 
         {/* CENTER — Nav Items */}
+        {/* CENTER — Nav Items */}
         <motion.ul
           variants={centerContainer}
           className="flex gap-9 text-gray-400 uppercase tracking-wide"
         >
-          {navItems.map((item) => (
-            <motion.li
-              key={item.name}
-              variants={centerItem}
-              whileHover={{ y: -2 }}
-              className="relative cursor-pointer flex items-center gap-2 transition-colors duration-300 hover:text-gray-100
-                         after:absolute after:bottom-[-6px] after:left-0 after:w-0 after:h-[2px]
-                         after:bg-gray-100 after:transition-all after:duration-300 hover:after:w-full"
-            >
-              {item.icon}
-              <span>{item.name}</span>
-            </motion.li>
-          ))}
+          {navItems.map((item) => {
+            // Determine if this nav item matches the current pathname
+            const isActive =
+              (item.name === "Home" && pathname === "/home") ||
+              (item.name === "About" && pathname === "/about") ||
+              (item.name === "Experience" && pathname === "/experience");
+
+            return (
+              <motion.li
+                key={item.name}
+                variants={centerItem}
+                whileHover={{ y: -2 }}
+                className={`relative cursor-pointer flex items-center gap-2 transition-colors duration-300 
+                    ${isActive ? "text-white" : "text-gray-400"}
+                    after:absolute after:bottom-[-6px] after:left-0 after:w-0 after:h-[2px]
+                    after:bg-white after:transition-all after:duration-300
+                    ${isActive ? "after:w-full" : "hover:after:w-full"}`}
+              >
+                {item.icon}
+                <span>{item.name}</span>
+              </motion.li>
+            );
+          })}
         </motion.ul>
 
         {/* RIGHT — Magnetic Contact Button */}
