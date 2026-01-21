@@ -39,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${quicksand.variable} ${bricolage.variable} ${shadows.variable}`}>
       <body>
+        <BootSequence />
         <Navbar/>
           {children}
           <Footer />

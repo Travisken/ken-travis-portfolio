@@ -89,10 +89,12 @@ export default function HeroSection() {
 
   return (
     <section
-      ref={sectionRef}
-      className="relative flex min-h-screen overflow-hidden w-full items-center justify-between px-24"
+      className=" flex overflow-hidden w-full  px-24"
     >
-      {/* Heading */}
+     <div 
+      ref={sectionRef}
+      className="max-w-7xl relative flex items-center justify-between min-h-screen">
+       {/* Heading */}
       <div ref={headingRef} className="relative z-10 max-w-xl">
         <motion.div variants={fadeUp} initial="hidden" animate="visible">
           <StaggerText>
@@ -140,6 +142,7 @@ export default function HeroSection() {
           className="opacity-0 object-cover grayscale transition-all duration-500 hover:grayscale-0"
         />
       </div>
+     </div>
     </section>
   );
 }

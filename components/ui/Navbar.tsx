@@ -1,33 +1,105 @@
 "use client";
 
-import { Clock } from "lucide-react";
-import { useState, useEffect } from "react";
-import { Home, User, BookOpen } from "lucide-react";
+import { Clock, Home, User, BookOpen } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { easeOut } from "framer-motion";
+
+/* --------------------------------
+   Animation Variants
+--------------------------------- */
+
+const fadeFromLeft = {
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: easeOut },
+  },
+};
+
+const fadeFromRight = {
+  hidden: { opacity: 0, x: 40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: easeOut },
+  },
+};
+
+const centerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.25,
+    },
+  },
+};
+
+const centerItem = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+};
+
+/* --------------------------------
+   Magnetic Hover Hook
+--------------------------------- */
+
+function useMagnetic(strength = 0.3) {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * strength;
+    const y = (e.clientY - rect.top - rect.height / 2) * strength;
+
+    ref.current.style.transform = `translate(${x}px, ${y}px)`;
+  };
+
+  const reset = () => {
+    if (!ref.current) return;
+    ref.current.style.transform = `translate(0px, 0px)`;
+  };
+
+  return { ref, handleMouseMove, reset };
+}
+
+/* --------------------------------
+   Navbar Component
+--------------------------------- */
 
 export default function Navbar() {
+  const pathname = usePathname(); // Re-animate on route change
   const [time, setTime] = useState(new Date());
   const [scrolled, setScrolled] = useState(false);
 
-  // Update time every second
+  // Clock
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // Detect scroll for glass morph effect
+  // Glass morph on scroll
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], {
+  const formatTime = (date: Date) =>
+    date.toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
     });
-  };
 
   const navItems = [
     { name: "Home", icon: <Home size={18} /> },
@@ -37,43 +109,69 @@ export default function Navbar() {
 
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
+  const contactMagnetic = useMagnetic(0.35);
+
   return (
-    <nav
-      className={`fixed w-full top-0 z-50 transition-all duration-500 ${
+    <motion.nav
+      key={pathname} // 🔥 Forces re-animation on route change
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? " backdrop-blur-md border-b border-gray-50"
+          ? "backdrop-blur-lg bg-black/20 border-b border-white/30"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-8">
-        {/* Left: Clock + timezone */}
-        <div className="text-gray-300 font-mono text-sm flex gap-4 items-center animate-fade-in">
-          <span className="flex gap-2 font-semibold bg-[#181818] px-4 py-3 rounded-lg items-center ">
-            <Clock className="" />
+        {/* LEFT — Clock */}
+        <motion.div
+          variants={fadeFromLeft}
+          className="text-gray-300 font-mono text-sm flex gap-4 items-center"
+        >
+          <span className="flex gap-2 font-semibold bg-[#181818] px-4 py-3 rounded-lg items-center">
+            <Clock />
             {formatTime(time)}
           </span>
           <span className="text-sm">{timezone}</span>
-        </div>
+        </motion.div>
 
-        {/* Center: Nav Items */}
-        <ul className="flex gap-9 text-gray-400 uppercase tracking-wide">
+        {/* CENTER — Nav Items */}
+        <motion.ul
+          variants={centerContainer}
+          className="flex gap-9 text-gray-400 uppercase tracking-wide"
+        >
           {navItems.map((item) => (
-            <li
+            <motion.li
               key={item.name}
-              className="relative cursor-pointer flex items-center gap-2 transition-all duration-300 hover:text-gray-100 after:absolute after:bottom-[-6px] after:left-0 after:w-0 after:h-[2px] after:bg-gray-100 after:transition-all after:duration-300 hover:after:w-full"
+              variants={centerItem}
+              whileHover={{ y: -2 }}
+              className="relative cursor-pointer flex items-center gap-2 transition-colors duration-300 hover:text-gray-100
+                         after:absolute after:bottom-[-6px] after:left-0 after:w-0 after:h-[2px]
+                         after:bg-gray-100 after:transition-all after:duration-300 hover:after:w-full"
             >
               {item.icon}
               <span>{item.name}</span>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
-        {/* Right: Contact Button */}
-        <button className=" text-white/80 font-semibold px-8 py-2 rounded-lg border-2 border-white/80 transition-all duration-300 hover:bg-gray-700 hover:text-white">
-          
-          Contact Me
-        </button>
+        {/* RIGHT — Magnetic Contact Button */}
+        <motion.div
+          variants={fadeFromRight}
+          ref={contactMagnetic.ref}
+          onMouseMove={contactMagnetic.handleMouseMove}
+          onMouseLeave={contactMagnetic.reset}
+          className="transition-transform duration-300"
+        >
+          <button
+            className="text-white/80 font-semibold px-8 py-2 rounded-lg border-2 border-white/80
+                             transition-all duration-300 hover:bg-gray-700 hover:text-white"
+          >
+            Contact Me
+          </button>
+        </motion.div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
