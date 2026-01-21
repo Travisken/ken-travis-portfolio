@@ -1,12 +1,6 @@
-import AboutSection from "@/components/sections/BentoAboutSection";
-import HeroSection from "@/components/sections/HeroSection";
+// app/page.tsx
+import { redirect } from 'next/navigation';
 
-export default function Home() {
-  return(
-    <>
-    <HeroSection />
-    <AboutSection/>
-  </>
-  )
-  
+export default function RootPage() {
+  redirect('/home'); // Automatically sends user to /home
 }

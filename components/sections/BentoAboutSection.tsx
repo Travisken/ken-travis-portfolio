@@ -1,21 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function CursorGlowCard({
   title,
   description,
   children,
   className = "",
+  animateFrom = "bottom",
 }: {
   title: string;
   description: string;
   children?: React.ReactNode;
   className?: string;
+  animateFrom?: "top" | "left" | "right" | "bottom";
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+  if (!cardRef.current) return;
+
+  const directionMap = {
+    top: { y: -60, x: 0 },
+    bottom: { y: 60, x: 0 },
+    left: { x: -60, y: 0 },
+    right: { x: 60, y: 0 },
+  };
+
+  const ctx = gsap.context(() => {
+    gsap.fromTo(
+      cardRef.current,
+      {
+        opacity: 0,
+        ...directionMap[animateFrom],
+      },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: "top 85%",
+          end: "top 40%",
+          scrub: true, // 👈 this makes it fluid & reversible
+        },
+      }
+    );
+  }, cardRef);
+
+  return () => ctx.revert();
+}, [animateFrom]);
+
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -27,6 +70,7 @@ function CursorGlowCard({
 
   return (
     <div
+      ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -40,17 +84,17 @@ function CursorGlowCard({
         className="pointer-events-none absolute inset-0 rounded-3xl border border-white"
         style={{
           WebkitMaskImage: `radial-gradient(
-        120px 120px at ${pos.x}px ${pos.y}px,
-        black 0%,
-        black 40%,
-        transparent 70%
-      )`,
+            120px 120px at ${pos.x}px ${pos.y}px,
+            black 0%,
+            black 40%,
+            transparent 70%
+          )`,
           maskImage: `radial-gradient(
-        120px 120px at ${pos.x}px ${pos.y}px,
-        black 0%,
-        black 40%,
-        transparent 70%
-      )`,
+            120px 120px at ${pos.x}px ${pos.y}px,
+            black 0%,
+            black 40%,
+            transparent 70%
+          )`,
           opacity: hovered ? 1 : 0,
         }}
         transition={{ duration: 0.15 }}
@@ -86,7 +130,7 @@ export default function AboutSection() {
     <section className="bg-[#0a0a0a] flex items-center justify-center px-8 py-20">
       <div className="max-w-6xl">
         {/* Header */}
-        <div className="mb-12 items-start grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
           <h1 className="text-5xl font-bold leading-tight">
             Built Through Curiosity.
             <br />
@@ -105,60 +149,64 @@ export default function AboutSection() {
             title="Explore My Work"
             description="Dive deeper into my background, process, and experience or view my resume for a focused snapshot."
             className="md:col-span-2 md:row-span-2"
+            animateFrom="left"
           >
             <div className="mt-6 flex flex-wrap gap-4">
-              {/* Resume Button */}
               <motion.a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-white/90"
+                className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black"
               >
                 View Resume
               </motion.a>
 
-              {/* About Page Button */}
               <motion.a
-                href="/about"
+                href="/contact"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/5"
+                className="rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white"
               >
-                About Me
+                Contact Me
               </motion.a>
             </div>
           </CursorGlowCard>
 
           <CursorGlowCard
             title="Interfaces That Feel Right."
-            description="I specialize in modern frontend architecture using React, Next.js, and TypeScript. My focus is on building interfaces that are fast, accessible, and emotionally engaging through thoughtful motion and layout."
-            className="md:col-span-4 md:row-span-1"
+            description="I specialize in modern frontend architecture using React, Next.js, and TypeScript."
+            className="md:col-span-4"
+            animateFrom="top"
           />
 
           <CursorGlowCard
             title="Animation With Purpose."
-            description="I use Framer Motion, GSAP, and Three.js to enhance clarity not distract from it. Motion in my work guides attention, reinforces hierarchy, and makes products feel alive."
+            description="Motion that guides attention and reinforces hierarchy."
             className="md:col-span-2"
+            animateFrom="bottom"
           />
 
           <CursorGlowCard
             title="Native Feel. Web Discipline."
-            description="As a React Native developer, I build mobile apps that feel truly native while maintaining clean, scalable architecture. Performance and usability are non-negotiable."
+            description="React Native apps with native performance and clean architecture."
             className="md:col-span-2"
+            animateFrom="right"
           />
 
           <CursorGlowCard
             title="Consistency at Scale."
-            description="I think in systems reusable components, motion tokens, spacing rules, and typography scales. This allows products to grow without losing clarity or identity."
+            description="Design systems that grow without losing identity."
             className="md:col-span-3"
+            animateFrom="left"
           />
 
           <CursorGlowCard
             title="Always Learning. Always Shipping."
-            description="I’m driven by curiosity and iteration. I learn fast, ship intentionally, and refine relentlessly because great products are built, tested, and improved, not rushed."
+            description="Curiosity-driven iteration and refinement."
             className="md:col-span-3"
+            animateFrom="right"
           />
         </div>
       </div>

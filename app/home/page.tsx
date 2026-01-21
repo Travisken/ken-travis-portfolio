@@ -1,13 +1,12 @@
-import ScrollReveal from '@/components/animations/ScrollReveal'
+import AboutSection from "@/components/sections/BentoAboutSection";
+import HeroSection from "@/components/sections/HeroSection";
 
 export default function Home() {
-  return (
-    <div className="p-20">
-      <ScrollReveal>
-        <h1 className="text-5xl font-semibold">
-          Motion system online.
-        </h1>
-      </ScrollReveal>
-    </div>
+  return(
+    <>
+    <HeroSection />
+    <AboutSection/>
+  </>
   )
+  
 }
