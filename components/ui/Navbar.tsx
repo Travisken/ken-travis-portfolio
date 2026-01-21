@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Home, User, BookOpen } from "lucide-react";
+import { Clock, Home, User, BookOpen, Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -37,7 +37,6 @@ const centerItem = {
 
 function useMagnetic(strength = 0.3) {
   const ref = useRef<HTMLDivElement | null>(null);
-
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
@@ -45,12 +44,10 @@ function useMagnetic(strength = 0.3) {
     const y = (e.clientY - rect.top - rect.height / 2) * strength;
     ref.current.style.transform = `translate(${x}px, ${y}px)`;
   };
-
   const reset = () => {
     if (!ref.current) return;
     ref.current.style.transform = `translate(0px, 0px)`;
   };
-
   return { ref, handleMouseMove, reset };
 }
 
@@ -63,6 +60,7 @@ export default function Navbar() {
   const [time, setTime] = useState(new Date());
   const [scrolled, setScrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
     { name: "Home", icon: <Home size={18} />, path: "/" },
@@ -93,7 +91,6 @@ export default function Navbar() {
     date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   const contactMagnetic = useMagnetic(0.35);
 
   return (
@@ -106,18 +103,21 @@ export default function Navbar() {
         scrolled ? "backdrop-blur-lg bg-black/20 border-b border-white/30" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-8 relative">
+      <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 md:px-8 relative">
         {/* LEFT — Clock */}
         <motion.div variants={fadeFromLeft} className="text-gray-300 font-mono text-sm flex gap-4 items-center">
           <span className="flex gap-2 font-semibold bg-[#181818] px-4 py-3 rounded-lg items-center">
             <Clock />
             {formatTime(time)}
           </span>
-          <span className="text-sm">{timezone}</span>
+          <span className="hidden md:inline text-sm">{timezone}</span>
         </motion.div>
 
-        {/* CENTER — Nav Items */}
-        <motion.ul variants={centerContainer} className="flex gap-9 text-gray-400 uppercase tracking-wide relative">
+        {/* CENTER — Desktop Nav */}
+        <motion.ul
+          variants={centerContainer}
+          className="hidden md:flex gap-9 text-gray-400 uppercase tracking-wide relative"
+        >
           {navItems.map((item, index) => (
             <motion.li
               key={item.name}
@@ -133,7 +133,8 @@ export default function Navbar() {
                 {item.icon}
                 <span>{item.name}</span>
               </Link>
-              {/* Active underline using AnimatePresence & motion.div */}
+
+              {/* Active underline */}
               {activeIndex === index && (
                 <motion.div
                   layoutId="underline"
@@ -145,19 +146,61 @@ export default function Navbar() {
           ))}
         </motion.ul>
 
-        {/* RIGHT — Magnetic Contact Button */}
-        <motion.div
-          variants={fadeFromRight}
-          ref={contactMagnetic.ref}
-          onMouseMove={contactMagnetic.handleMouseMove}
-          onMouseLeave={contactMagnetic.reset}
-          className="transition-transform duration-300"
-        >
-          <button className="text-white/80 font-semibold px-8 py-2 rounded-lg border-2 border-white/80 transition-all duration-300 hover:bg-gray-700 hover:text-white">
-            Contact Me
+        {/* RIGHT — Magnetic Contact Button / Mobile Hamburger */}
+        <div className="flex items-center gap-4">
+          <motion.div
+            variants={fadeFromRight}
+            ref={contactMagnetic.ref}
+            onMouseMove={contactMagnetic.handleMouseMove}
+            onMouseLeave={contactMagnetic.reset}
+            className="transition-transform duration-300 hidden md:block"
+          >
+            <button className="text-white/80 font-semibold px-8 py-2 rounded-lg border-2 border-white/80 transition-all duration-300 hover:bg-gray-700 hover:text-white">
+              Contact Me
+            </button>
+          </motion.div>
+
+          {/* Hamburger Menu */}
+          <button
+            className="md:hidden flex items-center text-white/80"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </motion.div>
+        </div>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden bg-black/90 backdrop-blur-lg overflow-hidden"
+          >
+            <ul className="flex flex-col gap-4 px-6 py-6 text-white uppercase font-semibold">
+              {navItems.map((item, index) => (
+                <li key={item.name} onClick={() => setMenuOpen(false)}>
+                  <Link
+                    href={item.path}
+                    className={`block py-2 transition-colors duration-300 ${
+                      activeIndex === index ? "text-white" : "text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">{item.icon}<span>{item.name}</span></div>
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <button className="w-full text-left py-2 border-t border-gray-500 mt-4">
+                  Contact Me
+                </button>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
