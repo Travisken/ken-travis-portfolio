@@ -162,7 +162,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section className="bg-[#0a0a0a] flex items-center justify-center px-4 md:px-8 py-20">
+    <section className="bg-[#0a0a0a] flex items-center w-full overflow-hidden justify-center px-4 md:px-8 py-20">
       <div className="max-w-6xl">
         {/* Header */}
         <div

@@ -149,8 +149,8 @@ export default function HeroSection() {
       </section>
 
       {/* mobile view */}
-      <section className="flex md:hidden h-screen flex-col gap-8 px-4 pt-30">
-        <div className="w-full relative rounded-lg flex overflow-hidden bg-red-500 h-[80vh]">
+      <section className="flex md:hidden h-screen flex-col overflow-hidden w-full gap-8 px-4 pt-30">
+        <div className="w-full relative rounded-lg flex overflow-hidden bg-gray-300 h-[80vh]">
           <Image
             src="/images/hero-img.JPG"
             alt="Hero"
