@@ -1,3 +1,5 @@
+"use client"
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -14,7 +16,7 @@ export function ExperienceTimeline() {
   return (
     <div ref={sectionRef} className="absolute inset-0 pointer-events-none">
       <svg
-        className="absolute left-1/2 top-0 h-full -translate-x-1/2"
+        className="absolute left-1/2 top-10 h-full -translate-x-1/2"
         width="290"
         viewBox="0 0 260 1400"
         preserveAspectRatio="none"

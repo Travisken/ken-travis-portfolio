@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, cubicBezier } from "framer-motion";
-import ExperienceSection from "@/components/sections/ExperienceSection";
+// import ExperienceSection from "@/components/sections/ExperienceSection";
 
 const container = {
   hidden: {},
@@ -14,22 +14,22 @@ const container = {
   },
 };
 
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 60,
-    rotate: 0,
-  },
-  visible: (rotate: number) => ({
-    opacity: 1,
-    y: 0,
-    rotate,
-    transition: {
-      duration: 0.9,
-      ease: cubicBezier(0.22, 1, 0.36, 1),
-    },
-  }),
-};
+// const cardVariants = {
+//   hidden: {
+//     opacity: 0,
+//     y: 60,
+//     rotate: 0,
+//   },
+//   visible: (rotate: number) => ({
+//     opacity: 1,
+//     y: 0,
+//     rotate,
+//     transition: {
+//       duration: 0.9,
+//       ease: cubicBezier(0.22, 1, 0.36, 1),
+//     },
+//   }),
+// };
 
 const item = {
   hidden: { opacity: 0, y: 24 },
@@ -140,13 +140,18 @@ export default function AboutSection() {
               company’s framework, and catching up fast to deliver value without
               slowing the team down.
             </motion.p>
+
+            <motion.div variants={item}>
+              <button className="border-2 rounded-lg border-white/60 text-white/60 font-semibold py-3 px-8 hover:text-white hover:border-white duration-300 ease-in-out cursor-pointer">
+               View My Resume
+              </button>
+            </motion.div>
           </motion.div>
 
           {/* <div className="flex flex-1 min-h-screen relative">
            
           </div> */}
         </section>
-        <ExperienceSection />
       </section>
     </>
   );

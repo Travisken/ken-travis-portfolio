@@ -1,3 +1,5 @@
+"use client"
+
 import { motion, cubicBezier } from "framer-motion";
 import { experienceData } from "@/data/experience";
 import { ExperienceTimeline } from "../ui/ExperienceTimeline";
