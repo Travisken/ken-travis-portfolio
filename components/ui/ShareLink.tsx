@@ -23,7 +23,7 @@ export default function SharePortfolio() {
       </h2>
 
       <p className="max-w-xl mx-auto text-white/60">
-        If this portfolio helped you understand my work or inspired an idea,
+        If this portfolio helped you understand my work or sparked an idea,
         feel free to share it with someone who might find it useful.
       </p>
 

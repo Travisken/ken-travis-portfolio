@@ -88,7 +88,11 @@ export default function Navbar() {
   }, [pathname]);
 
   const formatTime = (date: Date) =>
-    date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
 
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const contactMagnetic = useMagnetic(0.35);
@@ -99,13 +103,18 @@ export default function Navbar() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
-        scrolled ? "backdrop-blur-lg bg-black/20 border-b border-white/30" : "bg-transparent"
+      className={`fixed top-0 z-50 w-full max-md:px-4 transition-all duration-500 ${
+        scrolled
+          ? "backdrop-blur-lg bg-black/20 border-b border-white/30"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 relative">
         {/* LEFT — Clock */}
-        <motion.div variants={fadeFromLeft} className="text-gray-300 font-mono text-sm flex gap-4 items-center">
+        <motion.div
+          variants={fadeFromLeft}
+          className="text-gray-300 font-mono text-sm flex gap-4 items-center"
+        >
           <span className="flex gap-2 font-semibold bg-[#181818] px-4 py-3 rounded-lg items-center">
             <Clock />
             {formatTime(time)}
@@ -127,7 +136,9 @@ export default function Navbar() {
               <Link
                 href={item.path}
                 className={`flex items-center gap-2 transition-colors duration-300 ${
-                  activeIndex === index ? "text-white" : "text-gray-400 hover:text-white"
+                  activeIndex === index
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white"
                 }`}
               >
                 {item.icon}
@@ -155,9 +166,12 @@ export default function Navbar() {
             onMouseLeave={contactMagnetic.reset}
             className="transition-transform duration-300 hidden md:block"
           >
-            <button className="text-white/80 font-semibold px-8 py-2 rounded-lg border-2 border-white/80 transition-all duration-300 hover:bg-gray-700 hover:text-white">
+            <Link
+              href="/contact"
+              className="text-white/80 font-semibold px-8 py-2 rounded-lg border-2 border-white/80 transition-all duration-300 hover:bg-gray-700 hover:text-white"
+            >
               Contact Me
-            </button>
+            </Link>
           </motion.div>
 
           {/* Hamburger Menu */}
@@ -179,23 +193,31 @@ export default function Navbar() {
             exit={{ height: 0, opacity: 0 }}
             className="md:hidden bg-black/90 backdrop-blur-lg overflow-hidden"
           >
-            <ul className="flex flex-col gap-4 px-6 py-6 text-white uppercase font-semibold">
+            <ul className="flex flex-col w-full gap-4 px-6 py-6 text-white uppercase font-semibold">
               {navItems.map((item, index) => (
                 <li key={item.name} onClick={() => setMenuOpen(false)}>
                   <Link
                     href={item.path}
                     className={`block py-2 transition-colors duration-300 ${
-                      activeIndex === index ? "text-white" : "text-gray-400 hover:text-white"
+                      activeIndex === index
+                        ? "text-white"
+                        : "text-gray-400 hover:text-white"
                     }`}
                   >
-                    <div className="flex items-center gap-2">{item.icon}<span>{item.name}</span></div>
+                    <div className="flex items-center gap-2">
+                      {item.icon}
+                      <span>{item.name}</span>
+                    </div>
                   </Link>
                 </li>
               ))}
-              <li>
-                <button className="w-full text-left py-2 border-t border-gray-500 mt-4">
+              <li onClick={() => setMenuOpen(false)} className="w-full flex">
+                <Link
+                  href="/contact"
+                  className="w-full text-left py-2 border-t border-gray-500 mt-4"
+                >
                   Contact Me
-                </button>
+                </Link>
               </li>
             </ul>
           </motion.div>
