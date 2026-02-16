@@ -161,9 +161,6 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <motion.div
             variants={fadeFromRight}
-            ref={contactMagnetic.ref}
-            onMouseMove={contactMagnetic.handleMouseMove}
-            onMouseLeave={contactMagnetic.reset}
             className="transition-transform duration-300 hidden md:block"
           >
             <Link
