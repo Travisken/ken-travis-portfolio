@@ -44,12 +44,12 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
-    // apple: '/apple-touch-icon.png',
+    apple: '/images/hero-img.JPG',
   },
   openGraph: {
     title: 'Ken Travis — Frontend & Mobile Engineer',
     description:
-      'Minimal, animated portfolio showcasing frontend and React Native expertise.',
+      'Frontend & mobile engineer specializing in React, Next.js, and React Native.',
     url: 'https://ken-travis-portfolio.vercel.app',
     siteName: 'Ken Travis',
     images: [
