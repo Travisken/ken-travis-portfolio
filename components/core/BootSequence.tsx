@@ -25,7 +25,7 @@ export default function BootSequence() {
 
     const sound = new Howl({
       src: ['/sounds/mac-startup.mp3'],
-      volume: 10
+      volume: 0.5
     })
 
     sound.play()
