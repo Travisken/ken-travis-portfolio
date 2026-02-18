@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import ParallaxImage from "../ui/ParallaxImage";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,6 +33,7 @@ export default function HeroSection() {
   const aboutBtnRef = useRef<HTMLButtonElement>(null);
   const craftingIconsRef = useRef<HTMLDivElement | null>(null);
   const experiencesIconsRef = useRef<HTMLDivElement | null>(null);
+  const router=useRouter()
 
   useLayoutEffect(() => {
     if (
@@ -248,6 +250,7 @@ export default function HeroSection() {
 
                 <button
                   ref={aboutBtnRef}
+                  onClick={()=>{router.push("/about")}}
                   className="mt-10 flex items-center gap-3 rounded-lg border-2 border-gray-600 px-10 py-3 text-xl font-semibold text-gray-200 transition hover:bg-gray-700 hover:text-white"
                 >
                   <Info className="h-5 w-5 opacity-80" />

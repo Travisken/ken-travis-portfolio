@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, cubicBezier } from "framer-motion";
 // import ExperienceSection from "@/components/sections/ExperienceSection";
 
@@ -142,9 +143,9 @@ export default function AboutSection() {
             </motion.p>
 
             <motion.div variants={item}>
-              <button className="border-2 rounded-lg border-white/60 text-white/60 font-semibold py-3 px-8 hover:text-white hover:border-white duration-300 ease-in-out cursor-pointer">
+              <Link href="https://docs.google.com/document/d/1vyCjovN5lD63TgtXZ62T3E0pHjKs8b10R3kABVOpPR8/edit?usp=sharing" className="border-2 rounded-lg border-white/60 text-white/60 font-semibold py-3 px-8 hover:text-white hover:border-white duration-300 ease-in-out cursor-pointer">
                View My Resume
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 

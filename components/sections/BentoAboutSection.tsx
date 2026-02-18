@@ -190,7 +190,7 @@ export default function AboutSection() {
           >
             <div className="mt-6 flex max-md:flex-col gap-4">
               <motion.a
-                href="/resume.pdf"
+                href="https://docs.google.com/document/d/1vyCjovN5lD63TgtXZ62T3E0pHjKs8b10R3kABVOpPR8/edit?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04 }}
