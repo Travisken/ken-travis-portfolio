@@ -6,8 +6,8 @@ export default function SharePortfolio() {
   const handleShare = async () => {
     if (navigator.share) {
       await navigator.share({
-        title: "My Portfolio",
-        text: "Check out my portfolio",
+        title: "Kensuomo Travis | Frontend Developer",
+        text: "Creative Frontend Developer dedicated to designing interfaces that are both intuitive and visually compelling. I strive to bring ideas to life in ways that resonate with users.",
         url: portfolioUrl,
       });
     } else {
