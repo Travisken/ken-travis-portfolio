@@ -68,7 +68,7 @@ export default function BootSequence() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black opacity-0"
+      className="fixed inset-0 z-50 h-screen top-0 flex items-center justify-center bg-black opacity-0"
     >
       <div className="flex flex-col items-center gap-6">
         {/* Logo / Initials */}

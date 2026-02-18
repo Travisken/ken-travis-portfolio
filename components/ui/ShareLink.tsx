@@ -1,7 +1,7 @@
 "use client";
 
 export default function SharePortfolio() {
-  const portfolioUrl = "https://your-portfolio-link.com";
+  const portfolioUrl = "https://ken-travis-portfolio.vercel.app/";
 
   const handleShare = async () => {
     if (navigator.share) {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import BootSequence from '@/components/core/BootSequence'
 import { Bricolage_Grotesque } from 'next/font/google'
+import { Playwrite_NZ } from 'next/font/google'
 import { Quicksand } from 'next/font/google'
 import { Shadows_Into_Light } from 'next/font/google'
 import Navbar from '@/components/ui/Navbar'
@@ -11,6 +12,12 @@ const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600', '700', '800'],
   variable: '--font-bricolage',
+})
+
+const playwrite = Playwrite_NZ({
+  weight: ["100","200","300","400"],
+  variable: "--font-playwrite",
+
 })
 
 const shadows = Shadows_Into_Light({
@@ -37,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${quicksand.variable} ${bricolage.variable} ${shadows.variable}`}>
+    <html lang="en" className={`${quicksand.variable} ${playwrite.variable} ${bricolage.variable} ${shadows.variable}`}>
       <body>
         <BootSequence />
         <Navbar/>

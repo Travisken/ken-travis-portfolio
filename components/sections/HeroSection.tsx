@@ -8,6 +8,18 @@ import StaggerText from "@/components/animations/StaggerText";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Info } from "lucide-react";
+import {
+  PenTool,
+  Sparkles,
+  Code2,
+  Layers,
+  Cpu,
+  Smartphone,
+  Wand2,
+  Rocket,
+  Orbit,
+} from "lucide-react";
+
 import ParallaxImage from "../ui/ParallaxImage";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,6 +30,8 @@ export default function HeroSection() {
   const cardRef = useRef<HTMLDivElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
   const aboutBtnRef = useRef<HTMLButtonElement>(null);
+  const craftingIconsRef = useRef<HTMLDivElement | null>(null);
+  const experiencesIconsRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     if (
@@ -86,6 +100,34 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  const hoverIn = (iconsRef: React.RefObject<HTMLDivElement | null>) => {
+    if (!iconsRef.current) return;
+
+    gsap.to(iconsRef.current.children, {
+      y: (_, el) => Number(el.getAttribute("data-y")),
+      x: (_, el) => Number(el.getAttribute("data-x")),
+      scale: 1.2,
+      opacity: 1,
+      duration: 0.6,
+      ease: "back.out(1.7)",
+      stagger: 0.05,
+    });
+  };
+
+  const hoverOut = (iconsRef: React.RefObject<HTMLDivElement | null>) => {
+    if (!iconsRef.current) return;
+
+    gsap.to(iconsRef.current.children, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      opacity: 0,
+      duration: 0.4,
+      ease: "power3.out",
+      stagger: 0.03,
+    });
+  };
+
   return (
     <>
       <section className="relative md:flex hidden w-full items-center justify-center overflow-hidden">
@@ -102,7 +144,52 @@ export default function HeroSection() {
                     👨🏽‍💻 Kensuomo Travis
                   </p>
                   <h1 className="text-[10rem] font-bricolage font-[1000] leading-[0.9]">
-                    Crafting
+                    <span
+                      className="relative cursor-grab overflow-visible"
+                      onMouseEnter={() => hoverIn(craftingIconsRef)}
+                      onMouseLeave={() => hoverOut(craftingIconsRef)}
+                    >
+                      <div
+                        ref={craftingIconsRef}
+                        className="pointer-events-none absolute inset-0"
+                      >
+                        {/* Top 3 icons */}
+                        <PenTool
+                          data-x="-60"
+                          data-y="-20"
+                          className="absolute left-[20rem] -top-10 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Sparkles
+                          data-x="0"
+                          data-y="-50"
+                          className="absolute left-[26rem] -top-14 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Code2
+                          data-x="60"
+                          data-y="-20"
+                          className="absolute left-[32rem] -top-4 h-8 w-8 text-purple-400 opacity-0"
+                        />
+
+                        {/* Bottom 3 icons */}
+                        <Layers
+                          data-x="50"
+                          data-y="10"
+                          className="absolute left-[0rem] -bottom-2 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Cpu
+                          data-x="40"
+                          data-y="10"
+                          className="absolute left-[7rem] -bottom-10 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Smartphone
+                          data-x="60"
+                          data-y="10"
+                          className="absolute left-[14rem] z-30 -bottom-4 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                      </div>
+                      Crafting
+                    </span>
+
                     <span className="mx-8 text-[5rem] font-shadows font-extralight italic text-gray-500">
                       Immersive
                     </span>
@@ -110,7 +197,52 @@ export default function HeroSection() {
                     <span className="mx-8 text-[5rem] font-shadows font-extralight italic text-gray-500">
                       Digital
                     </span>
-                    Experiences
+
+                    <span
+                      className="relative cursor-grab overflow-visible"
+                      onMouseEnter={() => hoverIn(experiencesIconsRef)}
+                      onMouseLeave={() => hoverOut(experiencesIconsRef)}
+                    >
+                      <div
+                        ref={experiencesIconsRef}
+                        className="pointer-events-none z-10 absolute inset-0"
+                      >
+                        {/* Top 3 icons */}
+                        <Wand2
+                          data-x="-50"
+                          data-y="-60"
+                          className="absolute right-[0rem] -top-4 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Rocket
+                          data-x="0"
+                          data-y="-80"
+                          className="absolute right-[5rem] -top-14 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Orbit
+                          data-x="50"
+                          data-y="-70"
+                          className="absolute right-[10rem] -top-4 h-8 w-8 text-purple-400 opacity-0"
+                        />
+
+                        {/* Bottom 3 icons */}
+                        <Layers
+                          data-x="-50"
+                          data-y="30"
+                          className="absolute left-[20rem] -bottom-6 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Cpu
+                          data-x="0"
+                          data-y="50"
+                          className="absolute left-[26rem] -bottom-16 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                        <Smartphone
+                          data-x="50"
+                          data-y="20"
+                          className="absolute left-[32rem] z-30 -bottom-8 h-8 w-8 text-purple-400 opacity-0"
+                        />
+                      </div>
+                      Experiences
+                    </span>
                   </h1>
                 </StaggerText>
 

@@ -2,9 +2,10 @@
 
 import SharePortfolio from "@/components/ui/ShareLink";
 import { contactCards } from "@/data/contactCards";
-import { Rocket, Mail, Globe, Twitter, Linkedin, MessageCircle } from "lucide-react";
+import { Rocket, Mail, Globe, Twitter, Linkedin, MessageCircle, Github } from "lucide-react";
 import { motion } from "framer-motion";
 import ContactForm from "@/components/ui/ContactForm";
+import Link from "next/link";
 
 export default function ContactPage() {
   const iconMap = {
@@ -16,18 +17,23 @@ export default function ContactPage() {
   const socialLinks = [
     {
       name: "X",
-      href: "https://twitter.com/yourusername",
+      href: "https://x.com/kentrav81649556?s=21",
       icon: Twitter,
     },
     {
       name: "LinkedIn",
-      href: "https://www.linkedin.com/in/yourusername",
+      href: "https://www.linkedin.com/in/travisken",
       icon: Linkedin,
     },
     {
       name: "WhatsApp",
-      href: "https://wa.me/234XXXXXXXXXX",
+      href: "https://wa.me/2347039444495",
       icon: MessageCircle,
+    },
+    {
+      name: "Github",
+      href: "https://github.com/Travisken",
+      icon: Github,
     },
   ];
 
@@ -85,7 +91,7 @@ export default function ContactPage() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="rounded-2xl bg-white/10 md:bg-black p-6 flex-1"
             >
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 mb-4 items-center">
                 <div className="h-12 w-12 shrink-0 flex items-center justify-center rounded-full bg-white/10">
                   <Icon className="h-6 w-6 text-white" />
                 </div>
@@ -103,12 +109,12 @@ export default function ContactPage() {
         <div className="flex-1 flex items-center max-md:justify-center flex-col ">
           <p className="mb-4 text-3xl text-white/70">Kensuomo Travis</p>
 
-          <div className="flex gap-2 md:gap-4 ">
+          <Link href="mailto:kentravis37@gmail.com" className="flex gap-2 md:gap-4 ">
             <Mail className="md:h-6 h-4 w-4 md:w-6 text-white" />
             <h3 className="md:text-base text-sm font-semibold mb-2">
               Kentravis37@gmail.com
             </h3>
-          </div>
+          </Link>
         </div>
 
         <div className="flex-1 mt-8 md:mt-0">
