@@ -145,7 +145,7 @@ export default function HeroSection() {
                   <p className="mb-4 text-3xl text-gray-500">
                     👨🏽‍💻 Kensuomo Travis
                   </p>
-                  <h1 className="text-[10rem] font-bricolage font-[1000] leading-[0.9]">
+                  <h1 className="text-[9em] font-bricolage font-[1000] leading-[0.9]">
                     <span
                       className="relative cursor-grab overflow-visible"
                       onMouseEnter={() => hoverIn(craftingIconsRef)}
@@ -192,11 +192,11 @@ export default function HeroSection() {
                       Crafting
                     </span>
 
-                    <span className="mx-8 text-[5rem] font-shadows font-extralight italic text-gray-500">
+                    <span className="mx-8 text-[5rem] font-playwrite font-extralight text-gray-500">
                       Immersive
                     </span>
                     <br />
-                    <span className="mx-8 text-[5rem] font-shadows font-extralight italic text-gray-500">
+                    <span className="mx-8 text-[5rem] font-playwrite font-extralight text-gray-500">
                       Digital
                     </span>
 

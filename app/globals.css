@@ -10,6 +10,7 @@
   --font-sans: var(--font-quicksand);
   --font-heading: var(--font-bricolage);
   --font-handwritten: var(--font-shadows);
+  --font-playwrite: var(--font-playwrite);
 }
 
 html,
@@ -19,6 +20,10 @@ body {
   /* font-family: var(--font-quicksand); */
   overscroll-behavior: none;
   font-family: var(--font-heading), sans-serif;
+}
+
+.font-playwrite{
+  font-family: var(--font-playwrite) !important;
 }
 
 ::selection {

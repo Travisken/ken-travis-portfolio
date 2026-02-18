@@ -34,9 +34,44 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-  title: 'Ken Travis — Frontend & Mobile Engineer',
-  description: 'Minimal, animated portfolio showcasing frontend and React Native expertise'
+  title: {
+    default: 'Ken Travis — Frontend & Mobile Engineer',
+    template: '%s | Ken Travis',
+  },
+  description:
+    'Frontend & mobile engineer specializing in React, Next.js, and React Native. Crafting minimal, animated, high-performance user experiences.',
+  metadataBase: new URL('https://ken-travis-portfolio.vercel.app'), // replace with your domain
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    // apple: '/apple-touch-icon.png',
+  },
+  openGraph: {
+    title: 'Ken Travis — Frontend & Mobile Engineer',
+    description:
+      'Minimal, animated portfolio showcasing frontend and React Native expertise.',
+    url: 'https://ken-travis-portfolio.vercel.app',
+    siteName: 'Ken Travis',
+    images: [
+      {
+        url: '/images/hero-img.JPG',
+        width: 1200,
+        height: 630,
+        alt: 'Ken Travis Portfolio',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ken Travis — Frontend & Mobile Engineer',
+    description:
+      'Frontend & mobile engineer building elegant, high-performance experiences.',
+    images: ['/images/hero-img.JPG'],
+  },
 }
+
 
 export default function RootLayout({
   children
@@ -48,7 +83,9 @@ export default function RootLayout({
       <body>
         <BootSequence />
         <Navbar/>
+        <div className='min-h-screen'>
           {children}
+        </div>
           <Footer />
       </body>
     </html>

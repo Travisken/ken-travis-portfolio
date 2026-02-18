@@ -65,7 +65,7 @@ export default function Navbar() {
   const navItems = [
     { name: "Home", icon: <Home size={18} />, path: "/" },
     { name: "About", icon: <User size={18} />, path: "/about" },
-    { name: "Experience", icon: <BookOpen size={18} />, path: "/experience" },
+    { name: "Experiences", icon: <BookOpen size={18} />, path: "/experience" },
   ];
 
   // Clock
