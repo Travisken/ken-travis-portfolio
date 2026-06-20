@@ -91,7 +91,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
       })
       .to(progressRef.current, {
         width: "100%",
-        duration: 1.2,
+        duration: 0.2,
         ease: "power2.out",
       });
 
