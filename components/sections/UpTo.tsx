@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -32,7 +32,7 @@ export default function UpTo() {
               start: "top 85%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
 
@@ -41,21 +41,57 @@ export default function UpTo() {
         const cards = gridRef.current.querySelectorAll(".project-card");
 
         cards.forEach((card, index) => {
+          const direction = index % 4;
+
+          const fromVars = {
+            opacity: 0,
+            x: 0,
+            y: 0,
+            rotate: 0,
+          };
+
+          switch (direction) {
+            case 0:
+              fromVars.x = -120; // left
+              break;
+
+            case 1:
+              fromVars.x = 120; // right
+              break;
+
+            case 2:
+              fromVars.y = -120; // top
+              break;
+
+            case 3:
+              fromVars.y = 120; // bottom
+              break;
+          }
+
+          const x = index % 2 === 0 ? -100 : 100;
+          const y = index % 3 === 0 ? 80 : -80;
+
           gsap.fromTo(
             card,
-            { opacity: 0, y: 40 },
+            {
+              opacity: 0,
+              x,
+              y,
+              scale: 0.9,
+            },
             {
               opacity: 1,
+              x: 0,
               y: 0,
-              duration: 0.5,
-              delay: index * 0.1,
-              ease: "power2.out",
+              scale: 1,
+              ease: "none",
               scrollTrigger: {
                 trigger: card,
-                start: "top 88%",
-                toggleActions: "play none none none",
+                start: "top bottom",
+                end: "center center",
+                scrub: true,
               },
-            }
+            },
           );
         });
       }
@@ -119,7 +155,13 @@ function ProjectCard({ project }: { project: Project; index: number }) {
       gsap.fromTo(
         buttonRef.current,
         { scale: 1 },
-        { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }
+        {
+          scale: 0.95,
+          duration: 0.1,
+          yoyo: true,
+          repeat: 1,
+          ease: "power1.inOut",
+        },
       );
     }
   };
@@ -163,14 +205,10 @@ function ProjectCard({ project }: { project: Project; index: number }) {
           {project.category}
         </span>
 
-        <span className="text-xs text-white/50">
-          {project.status}
-        </span>
+        <span className="text-xs text-white/50">{project.status}</span>
       </div>
 
-      <h2 className="text-2xl font-semibold text-white">
-        {project.title}
-      </h2>
+      <h2 className="text-2xl font-semibold text-white">{project.title}</h2>
 
       <p className="text-sm text-white/70 leading-relaxed">
         {project.description}

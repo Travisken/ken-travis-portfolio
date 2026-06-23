@@ -58,7 +58,7 @@ export default function HeroSection() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=800",
+          end: "+=600",
           scrub: 0.8,
           pin: true,
           pinSpacing: true,
@@ -87,7 +87,7 @@ export default function HeroSection() {
           opacity: 1,
           ease: "power2.out",
         },
-        "-=0.2",
+        "-=0.4",
       );
 
       tl.to(aboutBtnRef.current, {
@@ -251,7 +251,7 @@ export default function HeroSection() {
                 <button
                   ref={aboutBtnRef}
                   onClick={()=>{router.push("/about")}}
-                  className="mt-10 flex items-center gap-3 rounded-lg border-2 border-gray-600 px-10 py-3 text-xl font-semibold text-gray-200 transition hover:bg-gray-700 hover:text-white"
+                  className="mt-10 flex items-center gap-3 rounded-lg bg-[#181818]  px-8 py-3 text-xl font-semibold text-white transition hover:bg-[#131313]"
                 >
                   <Info className="h-5 w-5 opacity-80" />
                   <StaggerText>

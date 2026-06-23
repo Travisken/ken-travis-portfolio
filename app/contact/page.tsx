@@ -93,7 +93,7 @@ export default function ContactPage() {
             >
               <div className="flex gap-4 mb-4 items-center">
                 <div className="h-12 w-12 shrink-0 flex items-center justify-center rounded-full bg-white/10">
-                  <Icon className="h-6 w-6 text-white" />
+                  <Icon size={20} className=" text-white" />
                 </div>
                 <h3 className="text-base font-semibold mb-2">{card.title}</h3>
               </div>
@@ -109,8 +109,8 @@ export default function ContactPage() {
         <div className="flex-1 flex items-center max-md:justify-center flex-col ">
           <p className="mb-4 text-3xl text-white/70">Kensuomo Travis</p>
 
-          <Link href="mailto:kentravis37@gmail.com" className="flex gap-2 md:gap-4 ">
-            <Mail className="md:h-6 h-4 w-4 md:w-6 text-white" />
+          <Link href="mailto:kentravis37@gmail.com" className="flex gap-2 md:-ml-5 md:gap-4 ">
+            <Mail size={20} className=" text-white" />
             <h3 className="md:text-base text-sm font-semibold mb-2">
               Kentravis37@gmail.com
             </h3>
