@@ -212,15 +212,15 @@ export default function AboutSection() {
           </CursorGlowCard>
 
           <CursorGlowCard
-            title="Interfaces That Feel Right."
-            description="I specialize in modern frontend architecture using React, Next.js, and TypeScript."
+            title="Architecture Overview."
+            description="Modular, composable systems built on React, Next.js, and TypeScript — structured for clarity from the route down to the component."
             className="md:col-span-4"
             animateFrom="top"
           />
 
           <CursorGlowCard
-            title="Animation With Purpose."
-            description="Motion that guides attention and reinforces hierarchy."
+            title="Design System Approach."
+            description="Tokens, primitives, and patterns that keep every screen consistent without slowing teams down."
             className="md:col-span-2"
             animateFrom="bottom"
           />
@@ -233,15 +233,15 @@ export default function AboutSection() {
           />
 
           <CursorGlowCard
-            title="Consistency at Scale."
-            description="Design systems that grow without losing identity."
+            title="Scalability Decisions."
+            description="Code-splitting, caching, and state boundaries chosen early so growth never means a rewrite."
             className="md:col-span-3"
             animateFrom="left"
           />
 
           <CursorGlowCard
-            title="Always Learning. Always Shipping."
-            description="Curiosity-driven iteration and refinement."
+            title="Built to Evolve."
+            description="Systems documented and decoupled enough that new features ship without fighting old ones."
             className="md:col-span-3"
             animateFrom="right"
           />

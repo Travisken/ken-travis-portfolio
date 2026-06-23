@@ -1,5 +1,6 @@
 import AboutSection from "@/components/sections/BentoAboutSection";
 import HeroSection from "@/components/sections/HeroSection";
+import UpTo from "@/components/sections/UpTo";
 
 export default function Home() {
   return(
@@ -7,6 +8,7 @@ export default function Home() {
     
     <HeroSection />
     <AboutSection/>
+    <UpTo/>
   </>
   )
   

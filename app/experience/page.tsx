@@ -4,7 +4,6 @@ export default function ExperiencePage(){
     return(
         <>
         <ExperienceSection />
-        
         </>
     )
 }

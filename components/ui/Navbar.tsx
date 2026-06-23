@@ -85,7 +85,7 @@ export default function Navbar() {
   useEffect(() => {
     const index = navItems.findIndex((item) => item.path === pathname);
     setActiveIndex(index >= 0 ? index : 0);
-  }, [pathname]);
+  }, [navItems, pathname]);
 
   const formatTime = (date: Date) =>
     date.toLocaleTimeString([], {
@@ -95,7 +95,6 @@ export default function Navbar() {
     });
 
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const contactMagnetic = useMagnetic(0.35);
 
   return (
     <motion.nav
