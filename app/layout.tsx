@@ -160,3 +160,24 @@ export const metadata: Metadata = {
     google: "YOUR_GOOGLE_SEARCH_CONSOLE_CODE",
   },
 };
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html
+      lang="en"
+      className={`${quicksand.variable} ${playwrite.variable} ${bricolage.variable} ${shadows.variable}`}
+    >
+      <body>
+        <BootProvider>
+          <Navbar />
+          <div className="min-h-screen">{children}</div>
+          <Footer />
+        </BootProvider>
+      </body>
+    </html>
+  );
+}

@@ -142,9 +142,9 @@ export default function HeroSection() {
             <div ref={headingRef} className="max-w-xl">
               <motion.div variants={fadeUp} initial="hidden" animate="visible">
                 <StaggerText>
-                  <p className="mb-4 text-3xl text-gray-500">
+                  <h1 className="mb-4 text-3xl text-gray-500">
                     👨🏽‍💻 Kensuomo Travis
-                  </p>
+                  </h1>
                   <h1 className="text-[9em] font-bricolage font-[1000] leading-[0.9]">
                     <span
                       className="relative cursor-grab overflow-visible"
