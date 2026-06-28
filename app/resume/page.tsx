@@ -44,7 +44,7 @@ export default function ResumeSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="max-md:px-4 w-full md:max-w-4xl flex flex-col gap-8 text-white/70"
+        className="max-md:px-4 w-full md:max-w-4xl mt-10 flex flex-col gap-8 text-white/70"
       >
         {/* Header */}
         <motion.div variants={item} className="space-y-2">

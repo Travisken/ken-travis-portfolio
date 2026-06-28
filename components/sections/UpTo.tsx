@@ -115,7 +115,7 @@ export default function UpTo() {
 
       <div
         ref={gridRef}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto mt-20 max-w-7xl w-full"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto mt-8 md:mt-20 max-w-7xl w-full"
       >
         {projects.map((project, index) => (
           <ProjectCard key={project.id} project={project} index={index} />
@@ -164,6 +164,8 @@ function ProjectCard({ project }: { project: Project; index: number }) {
         },
       );
     }
+
+    window.open(project.link)
   };
 
   return (

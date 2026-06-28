@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -189,25 +190,20 @@ export default function AboutSection() {
             animateFrom="left"
           >
             <div className="mt-6 flex max-md:flex-col gap-4">
-              <motion.a
-                href="https://docs.google.com/document/d/1vyCjovN5lD63TgtXZ62T3E0pHjKs8b10R3kABVOpPR8/edit?usp=sharing"
-                target="_blank"
+              <Link
+                href="/resume"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
                 className="rounded-xl flex-1 items-center flex justify-center bg-white px-6 py-3 text-sm font-semibold text-black"
               >
                 View Resume
-              </motion.a>
+              </Link>
 
-              <motion.a
+              <Link
                 href="/contact"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="rounded-xl border flex-1 items-center flex justify-center border-white/20 px-6 py-3 text-sm font-semibold text-white"
+                className="rounded-xl border hover:border-white duration-500 ease-in-out flex-1 items-center flex justify-center border-white/20 px-6 py-3 text-sm font-semibold text-white"
               >
                 Contact Me
-              </motion.a>
+              </Link>
             </div>
           </CursorGlowCard>
 

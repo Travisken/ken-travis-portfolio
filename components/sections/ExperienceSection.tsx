@@ -57,7 +57,7 @@ export default function ExperienceSection() {
         <div className="relative z-10 flex flex-col gap-28">
           {experienceData.map((exp, index) => (
             <motion.div
-              key={exp.company}
+              key={index}
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
